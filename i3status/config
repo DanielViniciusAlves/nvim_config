@@ -1,0 +1,44 @@
+general {
+        output_format = "i3bar"
+        colors = true
+        interval = 5
+}
+
+order += "battery 0"
+order += "volume master"
+order += "cpu_temperature 0"
+order += "wireless wlp9s0"
+order += "tztime local"
+
+cpu_temperature 0 {
+	format = " CPU: %degrees °C "
+} 
+
+volume master {
+        format = " volume: %volume "
+        format_muted = " volume: muted (%volume) "
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
+}
+
+battery 0 {
+        format = " %status %percentage %remaining "
+        format_down = "No battery"
+        status_chr = "Charging"
+        status_bat = "Battery"
+        status_unk = "?"
+        status_full = "Full"
+        path = "/sys/class/power_supply/BAT%d/uevent"
+        low_threshold = 20
+}
+
+wireless wlp9s0 {
+        format_up = " name: %essid | speed: %bitrate | ip: %ip "
+        format_down = "network down"
+}
+
+tztime local {
+    format = " %d.%m.%Y - %H:%M:%S "
+}
+
